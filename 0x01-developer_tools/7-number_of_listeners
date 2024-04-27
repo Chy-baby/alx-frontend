@@ -1,0 +1,38 @@
+import requests
+from bs4 import BeautifulSoup
+import re
+
+# Function to count occurrences of "click" events in JavaScript files
+def count_click_events(url):
+    # Fetch the HTML content of the webpage
+    response = requests.get(url)
+    html_content = response.text
+
+    # Parse the HTML content using BeautifulSoup
+    soup = BeautifulSoup(html_content, 'html.parser')
+
+    # Find all JavaScript file URLs
+    js_files = [script['src'] for script in soup.find_all('script', src=True)]
+
+    # Initialize click count
+    click_count = 0
+
+    # Iterate through each JavaScript file
+    for js_file in js_files:
+        # Fetch the content of the JavaScript file
+        js_response = requests.get(js_file)
+        js_content = js_response.text
+
+        # Count occurrences of "click" events using regular expression
+        click_count += len(re.findall(r'\.addEventListener\(["\']click["\']', js_content))
+
+    return click_count
+
+# URL of the website to scrape
+url = "https://dev-tools.alx-tools.com/"
+
+# Call the function to count "click" events
+total_clicks = count_click_events(url)
+
+print("Total click events:", total_clicks)
+

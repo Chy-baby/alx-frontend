@@ -1,0 +1,24 @@
+from selenium import webdriver
+from color_converter import hex2hsl
+
+# Initialize the Chrome WebDriver
+driver = webdriver.Chrome()
+
+# Open the website
+driver.get("https://dev-tools.alx-tools.com/")
+
+# Find the primary button "Send"
+send_button = driver.find_element_by_xpath("//button[contains(@class, 'primary') and contains(text(), 'Send')]")
+
+# Get the computed background-color value in hexadecimal format
+background_color_hex = send_button.value_of_css_property("background-color")
+
+# Convert the hexadecimal color value to HSL format
+background_color_hsl = hex2hsl(background_color_hex)
+
+# Print the background-color in HSL format
+print(f"Background-color of the primary button in HSL format: hsl({background_color_hsl});")
+
+# Close the browser
+driver.quit()
+

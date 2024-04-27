@@ -1,0 +1,13 @@
+import os
+
+# Path to the "freelancer.css" file
+file_path = "/path/to/your/freelancer.css"
+
+# Check if the file exists
+if os.path.exists(file_path):
+    # Get the size of the file in bytes
+    file_size = os.path.getsize(file_path)
+    print("Size of freelancer.css:", file_size, "bytes")
+else:
+    print("File not found.")
+

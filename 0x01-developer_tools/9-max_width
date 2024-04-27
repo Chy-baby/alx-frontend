@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <style>
+        /* CSS rule for .btn-xl class */
+        .btn-xl {
+            padding: 1rem 1.75rem;
+            font-size: 1.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Your HTML content here -->
+    <button class="btn-xl">Your Button Text</button>
+</body>
+</html>
+

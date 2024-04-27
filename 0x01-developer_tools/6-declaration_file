@@ -1,0 +1,47 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+
+# Initialize the Chrome WebDriver
+driver = webdriver.Chrome()
+
+# Open the website
+driver.get("https://dev-tools.alx-tools.com/")
+
+# Wait for the page to load
+driver.implicitly_wait(10)  # Adjust the wait time as needed
+
+# Find the element representing the "ABOUT" section heading
+about_heading = driver.find_element_by_xpath("//h2[contains(text(), 'ABOUT')]")
+
+# Right-click on the element to trigger the context menu
+webdriver.ActionChains(driver).context_click(about_heading).perform()
+
+# Press the "I" key to select "Inspect" from the context menu
+webdriver.ActionChains(driver).send_keys(Keys.ARROW_DOWN).perform()
+webdriver.ActionChains(driver).send_keys(Keys.ARROW_DOWN).perform()
+webdriver.ActionChains(driver).send_keys(Keys.ARROW_DOWN).perform()
+webdriver.ActionChains(driver).send_keys("i").perform()
+
+# Switch to the DevTools window
+driver.switch_to.window(driver.window_handles[1])
+
+# Navigate to the "Computed" tab
+computed_tab = driver.find_element_by_xpath("//div[@id='computed-properties-tab']")
+computed_tab.click()
+
+# Find the margin-bottom property
+margin_bottom_property = driver.find_element_by_xpath("//td[@data-name='margin-bottom']")
+
+# Get the source file information
+source_file = margin_bottom_property.find_element_by_xpath("./following-sibling::td").text
+print("The margin-bottom property is coming from:", source_file)
+
+# Close the DevTools window
+driver.close()
+
+# Switch back to the main window
+driver.switch_to.window(driver.window_handles[0])
+
+# Close the browser
+driver.quit()
+
